@@ -1,7 +1,10 @@
 import {useCampgrounds} from "./useCampgrounds";
 import CampgroundCard from "./CampgroundCard"
+import { useSearchParams } from "react-router-dom";
 function CampgroundList() {
-    const {isPending, campgrounds} = useCampgrounds();
+    const [searchParams] = useSearchParams();
+    const searchQuery = searchParams.get("search") || "";
+    const {isPending, campgrounds} = useCampgrounds({search: searchQuery});
     console.log(campgrounds)
     if(isPending) return <div>Loading...</div>
     return (

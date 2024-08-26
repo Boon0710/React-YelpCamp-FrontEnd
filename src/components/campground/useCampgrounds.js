@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchCampgrounds } from "../../service/apiCampground";
 
-export function useCampgrounds(){
+export function useCampgrounds(searchParams){
     const {isPending, data: campgrounds} = useQuery({
-        queryKey: ["campgrounds"],
-        queryFn: fetchCampgrounds
+        queryKey: ["campgrounds", searchParams],
+        queryFn: () => fetchCampgrounds(searchParams)
     })
     return {isPending, campgrounds}
 }

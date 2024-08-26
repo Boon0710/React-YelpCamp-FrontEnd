@@ -6,6 +6,7 @@ import { useLogout } from "../components/user/useLogout";
 import { HiOutlineUserAdd } from "react-icons/hi";
 import { CiLogin, CiLogout } from "react-icons/ci";
 import { IoCreateOutline } from "react-icons/io5";
+import SearchBar from "./SearchBar";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,6 +27,9 @@ function Navbar() {
         <Link className="text-2xl font-bold hover:text-yellow-300 transition duration-300" to="/">
           YelpCamp
         </Link>
+        <div>
+          <SearchBar />
+        </div>
         <button
           className="text-white inline-flex items-center p-2 rounded-md md:hidden"
           onClick={toggleNavbar}

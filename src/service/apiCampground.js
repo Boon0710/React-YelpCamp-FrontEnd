@@ -1,7 +1,7 @@
 import axios from "axios";
 
-export async function fetchCampgrounds() {
-  const response = await axios.get("http://localhost:3000/campgrounds");
+export async function fetchCampgrounds(searchParams) {
+  const response = await axios.get("http://localhost:3000/campgrounds", {params: searchParams});
   return response.data;
 }
 
