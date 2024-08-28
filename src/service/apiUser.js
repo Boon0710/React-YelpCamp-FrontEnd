@@ -18,7 +18,9 @@ export async function loginUser(data) {
 
 export async function registerUser(data) {
   try {
-    const response = await axios.post("http://localhost:3000/register", data, {withCredentials: true});
+    const response = await axios.post("http://localhost:3000/register", data, {
+      withCredentials: true,
+    });
     return response.data;
   } catch (error) {
     if (error.response) {
@@ -42,6 +44,23 @@ export async function logoutUser() {
     "http://localhost:3000/logout",
     {},
     { withCredentials: true }
+  );
+  return response.data;
+}
+
+export async function fetchUser(userId) {
+  const response = await axios.get(`http://localhost:3000/profile/${userId}`);
+  return response.data;
+}
+
+export async function updateUser(userId, formData) {
+  const response = await axios.put(
+    `http://localhost:3000/profile/${userId}/`,
+    formData,
+    {
+      headers: { "Content-Type": "multipart/form-data" },
+      withCredentials: true,
+    }
   );
   return response.data;
 }

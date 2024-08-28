@@ -12,6 +12,8 @@ import CampgroundDetail from "./pages/CampgroundDetail";
 
 import { Toaster } from "react-hot-toast";
 import ProtectedRoute from "./pages/ProtectedRoute";
+import UserProfile from "./pages/UserProfile";
+import UpdateUserProfile from "./pages/UpdateUserProfile";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -32,6 +34,8 @@ function App() {
             <Route path="campgrounds" element={<Campgrounds />} />
             <Route path="campgrounds/new" element={<ProtectedRoute><CreateCampground /></ProtectedRoute>} />
             <Route path="campgrounds/:id" element={<CampgroundDetail />} />
+            <Route path="profile/:userId" element={<UserProfile />}/>
+            <Route path="profile/:userId/update" element={<ProtectedRoute><UpdateUserProfile /></ProtectedRoute>}/>
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
           </Route>
