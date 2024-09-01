@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form"
 import { useRegister } from "./useRegister";
+import SpinnerMini from "../../ui/SpinnerMini";
 
 
 function RegisterForm() {
@@ -65,7 +66,7 @@ function RegisterForm() {
                       disabled={isPending}
                       className="w-full bg-green-600 text-white font-semibold py-2 px-4 rounded-md shadow hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
                     >
-                      {isPending ? "Registering..." : "Register"}
+                      {isPending ? <SpinnerMini /> : "Register"}
                     </button>
                   </div>
                 </form>

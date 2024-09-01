@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form"
 import { useLogin } from "./useLogin";
+import SpinnerMini from "../../ui/SpinnerMini";
 
 function LoginForm() {
     const {register, handleSubmit} = useForm();
@@ -51,7 +52,7 @@ function LoginForm() {
                       type="submit"
                       className="w-full bg-green-600 text-white font-semibold py-2 px-4 rounded-md shadow hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
                     >
-                      {isPending ? 'Logging in...' : 'Login'}
+                      {isPending ? <SpinnerMini /> : 'Login'}
                     </button>
                   </div>
                 </form>

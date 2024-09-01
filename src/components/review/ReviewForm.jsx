@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useCreateReview } from "./useCreateReview";
 
 import StarRating from "../../ui/StarRating";
+import SpinnerMini from "../../ui/SpinnerMini";
 
 function ReviewForm({ campgroundId }) {
   const { register, setValue, handleSubmit, formState: {errors}, reset } = useForm({defaultValues: {rating: 0,}});
@@ -68,7 +69,7 @@ function ReviewForm({ campgroundId }) {
             isCreatingReview ? "opacity-50 cursor-not-allowed" : ""
           }`}
         >
-          {isCreatingReview ? "Submitting..." : "Submit"}
+          {isCreatingReview ? <SpinnerMini /> : "Submit"}
         </button>
       </form>
     </div>

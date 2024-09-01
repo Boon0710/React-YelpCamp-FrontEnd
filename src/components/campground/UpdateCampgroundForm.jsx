@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useForm } from "react-hook-form";
 import { useUpdateCampground } from "./useUpdateCampground";
+import SpinnerMini from "../../ui/SpinnerMini";
 
 function UpdateCampgroundForm({ campground }) {
   const {
@@ -205,7 +206,7 @@ function UpdateCampgroundForm({ campground }) {
                 className="w-full bg-green-600 text-white font-semibold py-2 px-4 rounded-md shadow hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
                 disabled={isUpdatingCampground}
               >
-                {isUpdatingCampground ? "Updating..." : "Update Campground"}
+                {isUpdatingCampground ? <SpinnerMini /> : "Update Campground"}
               </button>
             </div>
           </form>

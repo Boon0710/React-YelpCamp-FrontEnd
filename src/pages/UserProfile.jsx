@@ -2,12 +2,13 @@ import { useState } from "react";
 import { useUser } from "../components/user/useUser";
 import { Link } from "react-router-dom";
 import { FaRegEdit } from "react-icons/fa";
+import Spinner from "../ui/Spinner";
 
 function UserProfile() {
   const { data, isPending } = useUser();
   const [activeTab, setActiveTab] = useState("campgrounds"); // 'campgrounds' or 'reviews'
 
-  if (isPending) return <div>Loading...</div>;
+  if (isPending) return <div><Spinner /></div>;
 
   const { user, campgrounds, reviews } = data;
   console.log(user);

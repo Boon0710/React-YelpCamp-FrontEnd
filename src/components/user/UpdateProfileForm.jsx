@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { useUpdateUser } from "./useUpdateUser";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "./useAuth";
+import SpinnerMini from "../../ui/SpinnerMini";
 
 function UpdateProfileForm() {
   const { userId } = useParams();
@@ -173,7 +174,7 @@ function UpdateProfileForm() {
               isPending ? "opacity-50 cursor-not-allowed" : ""
             }`}
           >
-            {isPending ? "Updating..." : "Update Profile"}
+            {isPending ? <SpinnerMini /> : "Update Profile"}
           </button>
         </div>
       </form>
