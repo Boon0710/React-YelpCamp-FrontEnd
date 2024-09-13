@@ -1,30 +1,44 @@
 import { Link } from "react-router-dom";
 
-import Modal from "../../ui/Modal"
+import Modal from "../../ui/Modal";
 import ConfirmDelete from "../../ui/ConfirmDelete";
 import UpdateCampgroundForm from "./UpdateCampgroundForm";
 import { useDeleteCampground } from "./useDeleteCampground";
 
 /* eslint-disable react/prop-types */
 function CampgroundDetailCard({ campground, currentUser }) {
-  const {deleteCampground, isDeletingCampground} = useDeleteCampground();
-  function handleDelete(){
+  const { deleteCampground, isDeletingCampground } = useDeleteCampground();
+  function handleDelete() {
     const campgroundId = campground._id;
-    deleteCampground({campgroundId})
+    deleteCampground({ campgroundId });
   }
   return (
     <div className="bg-white shadow-lg rounded-lg overflow-hidden mt-6">
       <div className="p-6">
         <h5 className="text-3xl font-bold mb-4">{campground.title}</h5>
         <p className="text-gray-700 mb-4">
-          {campground.description || "No description available for this campground."}
+          {campground.description ||
+            "No description available for this campground."}
         </p>
         <ul className="space-y-2 text-lg">
           <li className="text-gray-500">
             <strong>Location:</strong> {campground.location}
           </li>
-          <li>
-            <strong>Submitted by:</strong> {campground.author.username}
+          <li className="text-gray-500 flex items-center">
+            <strong className="mr-2">Submitted by:</strong>
+            <Link
+              to={`/profile/${campground.author._id}`}
+              className="flex items-center ml-2 text-blue-600 hover:text-blue-800 hover:underline"
+            >
+              {campground.author.profilePicture && (
+                <img
+                  src={campground.author.profilePicture.url}
+                  alt={campground.author.username}
+                  className="w-8 h-8 rounded-full mr-2"
+                />
+              )}
+              {campground.author.username}
+            </Link>
           </li>
           <li>
             <strong>Price:</strong> ${campground.price}/night
@@ -34,30 +48,29 @@ function CampgroundDetailCard({ campground, currentUser }) {
         {/* Show Edit/Delete Buttons if User is the Author */}
         {currentUser && campground.author._id === currentUser._id && (
           <Modal>
-            
-          <div className="mt-6 flex space-x-4">
-            <Modal.Open opens="edit">
-            <button
-              className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-600"
-            >
-              Edit
-            </button>
-            </Modal.Open>
-            <Modal.Window name="edit">
-              <UpdateCampgroundForm campground={campground} />
-            </Modal.Window>
+            <div className="mt-6 flex space-x-4">
+              <Modal.Open opens="edit">
+                <button className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-600">
+                  Edit
+                </button>
+              </Modal.Open>
+              <Modal.Window name="edit">
+                <UpdateCampgroundForm campground={campground} />
+              </Modal.Window>
 
-            <Modal.Open opens="delete">
-              <button
-                className="bg-red-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-red-600"
-              >
-                Delete
-              </button>
-            </Modal.Open>
-            <Modal.Window name="delete">
-              <ConfirmDelete resourceName="campground" disabled={isDeletingCampground} onConfirm={handleDelete} />
-            </Modal.Window>
-          </div>
+              <Modal.Open opens="delete">
+                <button className="bg-red-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-red-600">
+                  Delete
+                </button>
+              </Modal.Open>
+              <Modal.Window name="delete">
+                <ConfirmDelete
+                  resourceName="campground"
+                  disabled={isDeletingCampground}
+                  onConfirm={handleDelete}
+                />
+              </Modal.Window>
+            </div>
           </Modal>
         )}
       </div>

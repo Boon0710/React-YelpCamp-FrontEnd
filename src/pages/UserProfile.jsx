@@ -10,8 +10,8 @@ function UserProfile() {
 
   if (isPending) return <div><Spinner /></div>;
 
-  const { user, campgrounds, reviews } = data;
-  console.log(user);
+  const { user, campgrounds, reviews, bookings } = data;
+  console.log(bookings);
   return (
     <div className="container mx-auto mt-10 grid grid-cols-1 md:grid-cols-3 gap-8">
       {/* Profile Card */}
@@ -72,6 +72,16 @@ function UserProfile() {
           >
             Reviews
           </button>
+          <button
+            onClick={() => setActiveTab("bookings")}
+            className={`px-6 py-2 font-semibold rounded-lg transition-colors duration-300 ${
+              activeTab === "reviews"
+                ? "bg-blue-500 text-white"
+                : "bg-gray-200 hover:bg-gray-300"
+            }`}
+          >
+            Bookings
+          </button>
         </div>
 
         {/* Tab Content */}
@@ -124,6 +134,73 @@ function UserProfile() {
               )}
             </div>
           )}
+          {activeTab === "bookings" && (
+  <div>
+    {bookings.length > 0 ? (
+      bookings.map((booking) => (
+        <div
+          key={booking._id}
+          className="mb-6 p-6 bg-gray-100 rounded-lg shadow-lg space-y-4"
+        >
+          
+          <div className="flex justify-between items-center mb-4">
+            <h3 className="text-lg font-semibold">
+              Campground: {booking.campground.title}
+            </h3>
+            <Link
+              to={`/campgrounds/${booking.campground._id}/bookings/${booking._id}`}
+              className="text-blue-500 underline hover:text-blue-700"
+            >
+              View Details
+            </Link>
+          </div>
+
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <p className="text-gray-600">
+                <strong>From:</strong>{" "}
+                {new Date(booking.startDate).toLocaleDateString()}
+              </p>
+              <p className="text-gray-600">
+                <strong>To:</strong>{" "}
+                {new Date(booking.endDate).toLocaleDateString()}
+              </p>
+              <p className="text-gray-600">
+                <strong>Number of Guests:</strong> {booking.numGuests}
+              </p>
+              <p className="text-gray-600">
+                <strong>Number of Nights:</strong> {booking.numNights}
+              </p>
+            </div>
+
+            
+            <div className="space-y-2">
+              <p className="text-gray-600">
+                <strong>Status:</strong>{" "}
+                {booking.isPaid ? (
+                  <span className="text-green-600 font-semibold">Paid</span>
+                ) : (
+                  <span className="text-red-600 font-semibold">Not Paid</span>
+                )}
+              </p>
+              <p className="text-gray-600">
+                <strong>Created At:</strong>{" "}
+                {new Date(booking.createdAt).toLocaleDateString()}
+              </p>
+              <p className="text-gray-600">
+                <strong>Updated At:</strong>{" "}
+                {new Date(booking.updatedAt).toLocaleDateString()}
+              </p>
+            </div>
+          </div>
+        </div>
+      ))
+    ) : (
+      <p className="text-center text-gray-500">No bookings made.</p>
+    )}
+  </div>
+)}
         </div>
       </div>
     </div>

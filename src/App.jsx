@@ -15,6 +15,7 @@ import ProtectedRoute from "./pages/ProtectedRoute";
 import UserProfile from "./pages/UserProfile";
 import UpdateUserProfile from "./pages/UpdateUserProfile";
 import PageNotFound from "./pages/PageNotFound";
+import BookingDetail from "./pages/BookingDetail";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -37,6 +38,7 @@ function App() {
             <Route path="campgrounds/:id" element={<CampgroundDetail />} />
             <Route path="profile/:userId" element={<UserProfile />}/>
             <Route path="profile/:userId/update" element={<ProtectedRoute><UpdateUserProfile /></ProtectedRoute>}/>
+            <Route path="campgrounds/:id/bookings/:bookingId" element={<ProtectedRoute><BookingDetail /></ProtectedRoute>}/>
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
           </Route>
